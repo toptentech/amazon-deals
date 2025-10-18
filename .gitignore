@@ -1,0 +1,9 @@
+# Ignoriere alles
+*
+
+# Ausnahme: docs-Ordner und sein Inhalt
+!docs/
+!docs/**
+
+# Ausnahme: .gitignore selbst
+!.gitignore

@@ -3,17 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazon Deals - Top Tech Angebote</title>
+    <title>TopTenTech - Die besten Amazon Deals aus 4 Ländern</title>
+    <meta name="description" content="TopTenTech zeigt dir die besten Tech-Angebote von Top-Marken aus Deutschland, Spanien, Italien und Frankreich. Spare bis zu 70% bei aktuellen Deals!">
     <style>
+        :root {
+            --color-primary-dark: #000B58;
+            --color-primary: #003161;
+            --color-accent: #006A67;
+            --color-highlight: #FDEB9E;
+            --color-highlight-dark: #f4d96b;
+            --color-text: #000B58;
+            --color-text-light: #003161;
+            --color-bg-light: #f8f9fa;
+            --color-white: #ffffff;
+            --color-border: #e9ecef;
+            --color-error: #dc3545;
+            --color-success: #006A67;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 50%, var(--color-accent) 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -23,100 +43,204 @@
             margin: 0 auto;
         }
         
+        /* Header */
         header {
-            background: white;
+            background: var(--color-white);
             border-radius: 20px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0, 11, 88, 0.2);
+        }
+        
+        .site-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
         }
         
         h1 {
-            color: #2d3748;
+            color: var(--color-text);
             font-size: 2.5em;
-            margin-bottom: 10px;
+            margin: 0;
+        }
+        
+        .brand-name {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
         }
         
         .subtitle {
-            color: #718096;
+            color: var(--color-text-light);
             font-size: 1.1em;
+            margin-bottom: 5px;
         }
         
-        .filters {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        
-        .filter-group {
-            margin-bottom: 20px;
-        }
-        
-        .filter-group:last-child {
-            margin-bottom: 0;
-        }
-        
-        .filter-group label {
-            display: block;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 10px;
-        }
-        
-        .search-box {
-            width: 100%;
-            padding: 12px 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        .search-box:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        .filter-buttons {
+        .stats-bar {
             display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid var(--color-border);
             flex-wrap: wrap;
+            align-items: stretch;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background: var(--color-bg-light);
+            border-radius: 10px;
+            font-size: 14px;
+            color: var(--color-text-light);
+            min-height: 40px;
+            border: 1px solid var(--color-border);
+        }
+        
+        .stat-value {
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+        
+        .faq-link-stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--color-highlight);
+            color: var(--color-primary-dark);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            box-shadow: 0 4px 15px rgba(253, 235, 158, 0.4);
+            font-size: 14px;
+            min-height: 40px;
+        }
+        
+        .faq-link-stat:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(253, 235, 158, 0.6);
+            background: var(--color-highlight-dark);
+        }
+        
+        /* Affiliate Notice */
+        .affiliate-notice {
+            background: #fffbf0;
+            border-left: 4px solid var(--color-highlight-dark);
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #6b5a2f;
+            display: flex;
+            align-items: flex-start;
             gap: 10px;
         }
         
-        .filter-btn {
-            padding: 10px 20px;
-            border: 2px solid #e2e8f0;
-            background: white;
-            border-radius: 12px;
+        /* Filter Section */
+        .filters {
+            background: var(--color-white);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 11, 88, 0.15);
+        }
+        
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--color-border);
+        }
+        
+        .filter-header h2 {
+            color: var(--color-text);
+            font-size: 1.3em;
+        }
+        
+        .reset-btn {
+            padding: 8px 16px;
+            background: var(--color-bg-light);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
             cursor: pointer;
+            font-weight: 600;
+            color: var(--color-text-light);
             transition: all 0.3s;
+        }
+        
+        .reset-btn:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+            border-color: var(--color-accent);
+        }
+        
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .filter-group label {
+            font-weight: 600;
+            color: var(--color-text);
             font-size: 14px;
-            font-weight: 500;
         }
         
-        .filter-btn:hover {
-            border-color: #667eea;
-            color: #667eea;
-        }
-        
-        .filter-btn.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-        
-        .sort-select {
+        .search-box, .filter-select {
             width: 100%;
             padding: 12px 20px;
-            border: 2px solid #e2e8f0;
+            border: 2px solid var(--color-border);
             border-radius: 12px;
             font-size: 16px;
-            background: white;
-            cursor: pointer;
+            transition: border-color 0.3s;
+            background: var(--color-white);
+            color: var(--color-text);
         }
         
+        .search-box:focus, .filter-select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(0, 106, 103, 0.1);
+        }
+        
+        /* Results Info */
+        .results-info {
+            background: var(--color-white);
+            padding: 15px 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 11, 88, 0.1);
+        }
+        
+        .results-count {
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        
+        .results-count .highlight {
+            color: var(--color-accent);
+            font-size: 1.2em;
+        }
+        
+        /* Deals Grid */
         .deals-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -125,26 +249,47 @@
         }
         
         .deal-card {
-            background: white;
+            background: var(--color-white);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0, 11, 88, 0.12);
             transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
+            position: relative;
+            border: 1px solid var(--color-border);
         }
         
         .deal-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 50px rgba(0, 106, 103, 0.25);
+            border-color: var(--color-accent);
+        }
+        
+        .deal-image-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            background: var(--color-bg-light);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .deal-image {
             width: 100%;
-            height: 250px;
+            height: 100%;
             object-fit: contain;
-            padding: 20px;
-            background: #f7fafc;
+        }
+        
+        .deal-badges {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
         
         .deal-content {
@@ -154,31 +299,36 @@
             flex-direction: column;
         }
         
+        .deal-meta {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        
         .deal-brand {
             display: inline-block;
-            background: #667eea;
-            color: white;
+            background: var(--color-primary);
+            color: var(--color-white);
             padding: 5px 12px;
             border-radius: 8px;
             font-size: 12px;
             font-weight: 600;
-            margin-bottom: 10px;
         }
         
         .deal-country {
             display: inline-block;
-            background: #48bb78;
-            color: white;
+            background: var(--color-accent);
+            color: var(--color-white);
             padding: 5px 12px;
             border-radius: 8px;
             font-size: 12px;
             font-weight: 600;
-            margin-left: 5px;
             text-transform: uppercase;
         }
         
         .deal-title {
-            color: #2d3748;
+            color: var(--color-text);
             font-size: 16px;
             line-height: 1.5;
             margin-bottom: 15px;
@@ -187,95 +337,239 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            min-height: 72px;
         }
         
         .deal-prices {
             margin-bottom: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 8px;
         }
         
         .current-price {
             font-size: 28px;
             font-weight: 700;
-            color: #e53e3e;
+            color: var(--color-error);
         }
         
         .original-price {
-            font-size: 18px;
+            font-size: 16px;
             color: #a0aec0;
             text-decoration: line-through;
-            margin-left: 10px;
         }
         
         .discount-badge {
             display: inline-block;
-            background: #e53e3e;
-            color: white;
-            padding: 8px 12px;
+            background: linear-gradient(135deg, var(--color-error) 0%, #ff6b6b 100%);
+            color: var(--color-white);
+            padding: 6px 12px;
             border-radius: 8px;
             font-weight: 700;
-            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .savings-info {
+            font-size: 13px;
+            color: var(--color-success);
+            font-weight: 600;
+            margin-top: 5px;
         }
         
         .deal-link {
             display: block;
-            background: #667eea;
-            color: white;
+            background: var(--color-highlight);
+            color: var(--color-primary-dark);
             text-align: center;
             padding: 15px;
             border-radius: 12px;
             text-decoration: none;
-            font-weight: 600;
-            transition: background 0.3s;
+            font-weight: 700;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            box-shadow: 0 4px 15px rgba(253, 235, 158, 0.4);
         }
         
         .deal-link:hover {
-            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(253, 235, 158, 0.6);
+            background: var(--color-highlight-dark);
         }
         
-        .affiliate-notice {
-            background: #fef5e7;
-            border-left: 4px solid #f39c12;
-            padding: 15px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            font-size: 14px;
-            color: #856404;
-        }
-        
+        /* No Results */
         .no-results {
             text-align: center;
             padding: 60px 20px;
-            background: white;
+            background: var(--color-white);
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0, 11, 88, 0.12);
+        }
+        
+        .no-results-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0.3;
         }
         
         .no-results h2 {
-            color: #2d3748;
+            color: var(--color-text);
             font-size: 2em;
             margin-bottom: 10px;
         }
         
         .no-results p {
-            color: #718096;
+            color: var(--color-text-light);
             font-size: 1.1em;
         }
         
+        /* FAQ Section */
+        .faq-section {
+            background: var(--color-white);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 11, 88, 0.15);
+            scroll-margin-top: 20px;
+        }
+        
+        .faq-section h2 {
+            color: var(--color-text);
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .faq-section .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid var(--color-border);
+            padding: 20px 0;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text);
+            padding: 10px 0;
+            user-select: none;
+        }
+        
+        .faq-question:hover {
+            color: var(--color-accent);
+        }
+        
+        .faq-icon {
+            font-size: 24px;
+            transition: transform 0.3s;
+            color: var(--color-accent);
+            flex-shrink: 0;
+            margin-left: 15px;
+        }
+        
+        .faq-icon.active {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            color: var(--color-text-light);
+            line-height: 1.8;
+        }
+        
+        .faq-answer.active {
+            max-height: 1500px;
+            padding-top: 15px;
+            transition: max-height 0.5s ease-in;
+        }
+        
+        .faq-answer p {
+            margin-bottom: 12px;
+        }
+        
+        .faq-answer ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .faq-answer li {
+            margin-bottom: 8px;
+        }
+        
+        .faq-highlight {
+            background: #f0fffe;
+            border-left: 3px solid var(--color-accent);
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--color-highlight);
+            color: var(--color-primary-dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(253, 235, 158, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            z-index: 100;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(253, 235, 158, 0.7);
+            background: var(--color-highlight-dark);
+        }
+        
+        .back-to-top.visible {
+            display: flex;
+        }
+        
+        /* Footer */
         footer {
             text-align: center;
-            color: white;
+            color: var(--color-white);
             padding: 20px;
             margin-top: 40px;
         }
         
         footer a {
-            color: white;
+            color: var(--color-highlight);
             text-decoration: underline;
             margin: 0 10px;
+            font-weight: 600;
         }
         
         footer a:hover {
             text-decoration: none;
+            color: var(--color-highlight-dark);
         }
         
         /* Modal Styles */
@@ -288,11 +582,11 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0, 11, 88, 0.7);
         }
         
         .modal-content {
-            background-color: #fefefe;
+            background-color: var(--color-white);
             margin: 5% auto;
             padding: 40px;
             border-radius: 20px;
@@ -300,7 +594,7 @@
             max-width: 800px;
             max-height: 80vh;
             overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 11, 88, 0.4);
         }
         
         .close {
@@ -314,30 +608,37 @@
         
         .close:hover,
         .close:focus {
-            color: #000;
+            color: var(--color-text);
         }
         
         .modal-content h2 {
-            color: #2d3748;
+            color: var(--color-text);
             margin-bottom: 20px;
             font-size: 2em;
         }
         
         .modal-content h3 {
-            color: #2d3748;
+            color: var(--color-text);
             margin-top: 25px;
             margin-bottom: 15px;
             font-size: 1.3em;
         }
         
+        .modal-content h4 {
+            color: var(--color-text-light);
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
         .modal-content p {
-            color: #4a5568;
+            color: var(--color-text-light);
             line-height: 1.8;
             margin-bottom: 15px;
         }
         
         .modal-content a {
-            color: #667eea;
+            color: var(--color-accent);
             text-decoration: none;
         }
         
@@ -349,7 +650,12 @@
             margin-bottom: 25px;
         }
         
+        /* Responsive */
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
             h1 {
                 font-size: 1.8em;
             }
@@ -358,10 +664,44 @@
                 grid-template-columns: 1fr;
             }
             
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .modal-content {
                 width: 95%;
                 padding: 20px;
                 margin: 10% auto;
+            }
+            
+            .faq-section {
+                padding: 25px 20px;
+            }
+            
+            .faq-question {
+                font-size: 16px;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+            
+            .results-info {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .stats-bar {
+                gap: 10px;
+            }
+            
+            .stat-item, .faq-link-stat {
+                font-size: 12px;
+                padding: 8px 12px;
             }
         }
     </style>
@@ -369,65 +709,279 @@
 <body>
     <div class="container">
         <header>
-            <h1>🔥 Amazon Deals</h1>
-            <p class="subtitle">Die besten Tech-Angebote von Top-Marken</p>
+            <div class="site-title">
+                <h1><span class="brand-name">TopTenTech</span> 🔥</h1>
+            </div>
+            <p class="subtitle">Die besten Tech-Angebote von Top-Marken aus 4 Ländern</p>
             <p class="subtitle">Letzte Aktualisierung: 18.10.2025 20:20</p>
+            
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span>📦</span>
+                    <span><span class="stat-value" id="total-deals">461</span> Angebote</span>
+                </div>
+                <div class="stat-item">
+                    <span>🏷️</span>
+                    <span><span class="stat-value">22</span> Marken</span>
+                </div>
+                <div class="stat-item">
+                    <span>🌍</span>
+                    <span><span class="stat-value">4</span> Länder</span>
+                </div>
+                <div class="stat-item">
+                    <span>💰</span>
+                    <span>Bis zu <span class="stat-value">58%</span> Rabatt</span>
+                </div>
+                <a href="#faq-section" class="faq-link-stat">
+                    <span>❓</span>
+                    <span>Häufige Fragen</span>
+                </a>
+            </div>
         </header>
         
         <div class="affiliate-notice">
-            <strong>ℹ️ Hinweis:</strong> Diese Seite enthält Affiliate-Links. Beim Kauf über diese Links erhalten wir eine Provision, ohne dass dir zusätzliche Kosten entstehen.
+            <span style="font-size: 20px;">ℹ️</span>
+            <div>
+                <strong>Transparenz-Hinweis:</strong> Diese Seite enthält Affiliate-Links zum Amazon-Partnerprogramm. Beim Kauf über diese Links erhalten wir eine Provision, ohne dass dir zusätzliche Kosten entstehen. Der Produktpreis bleibt für dich gleich.
+            </div>
         </div>
         
         <div class="filters">
-            <div class="filter-group">
-                <label for="search">🔍 Suche</label>
-                <input type="text" id="search" class="search-box" placeholder="Produkt suchen...">
+            <div class="filter-header">
+                <h2>🔍 Finde dein Schnäppchen</h2>
+                <button class="reset-btn" id="reset-filters">↻ Filter zurücksetzen</button>
             </div>
             
-            <div class="filter-group">
-                <label>🏷️ Marken</label>
-                <div class="filter-buttons" id="brand-filters">
-                    <button class="filter-btn active" data-brand="all">Alle</button>
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label for="search">Produktsuche</label>
+                    <input type="text" id="search" class="search-box" placeholder="z.B. iPhone, MacBook, AirPods...">
+                </div>
+                
+                <div class="filter-group">
+                    <label for="brand-filter">Marke</label>
+                    <select id="brand-filter" class="filter-select">
+                        <option value="all">Alle Marken</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="country-filter">Land</label>
+                    <select id="country-filter" class="filter-select">
+                        <option value="all">Alle Länder</option>
+                        <option value="de">🇩🇪 Deutschland</option>
+                        <option value="es">🇪🇸 Spanien</option>
+                        <option value="it">🇮🇹 Italien</option>
+                        <option value="fr">🇫🇷 Frankreich</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="sort">Sortierung</label>
+                    <select id="sort" class="filter-select">
+                        <option value="discount-desc">Höchster Rabatt zuerst</option>
+                        <option value="discount-asc">Niedrigster Rabatt zuerst</option>
+                        <option value="price-asc">Günstigste zuerst</option>
+                        <option value="price-desc">Teuerste zuerst</option>
+                    </select>
                 </div>
             </div>
-            
-            <div class="filter-group">
-                <label>🌍 Länder</label>
-                <div class="filter-buttons" id="country-filters">
-                    <button class="filter-btn active" data-country="all">Alle</button>
-                    <button class="filter-btn" data-country="de">🇩🇪 Deutschland</button>
-                    <button class="filter-btn" data-country="es">🇪🇸 Spanien</button>
-                    <button class="filter-btn" data-country="it">🇮🇹 Italien</button>
-                    <button class="filter-btn" data-country="fr">🇫🇷 Frankreich</button>
-                </div>
-            </div>
-            
-            <div class="filter-group">
-                <label for="sort">📊 Sortierung</label>
-                <select id="sort" class="sort-select">
-                    <option value="discount-desc">Höchster Rabatt zuerst</option>
-                    <option value="discount-asc">Niedrigster Rabatt zuerst</option>
-                    <option value="price-asc">Niedrigster Preis zuerst</option>
-                    <option value="price-desc">Höchster Preis zuerst</option>
-                </select>
+        </div>
+        
+        <div class="results-info">
+            <div class="results-count">
+                <span class="highlight" id="visible-count">461</span> von <span id="total-count">461</span> Angeboten
             </div>
         </div>
         
         <div class="deals-grid" id="deals-grid"></div>
         
         <div class="no-results" id="no-results" style="display: none;">
+            <div class="no-results-icon">🔍</div>
             <h2>Keine Angebote gefunden</h2>
             <p>Versuche andere Filter oder Suchbegriffe</p>
         </div>
         
+        <!-- FAQ Section -->
+        <div id="faq-section" class="faq-section">
+            <h2>❓ Häufig gestellte Fragen</h2>
+            <p class="subtitle">Alles Wichtige zu Bestellungen auf internationalen Amazon-Seiten</p>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Kann ich aus Deutschland auf amazon.es, amazon.fr oder amazon.it bestellen?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Ja, das ist grundsätzlich möglich!</strong> Amazon ermöglicht Bestellungen über Ländergrenzen hinweg innerhalb Europas. Du kannst mit deinem deutschen Amazon-Konto auf den Websites von Amazon Spanien (amazon.es), Amazon Frankreich (amazon.fr) und Amazon Italien (amazon.it) einkaufen und die Waren nach Deutschland liefern lassen.</p>
+                    <div class="faq-highlight">
+                        <strong>💡 Praxis-Tipp:</strong> Viele Produkte sind auf ausländischen Amazon-Seiten günstiger, insbesondere bei zeitlich begrenzten Angeboten. Die Angebote auf TopTenTech zeigen dir automatisch, in welchem Land das jeweilige Schnäppchen verfügbar ist.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Brauche ich einen neuen Account für jedes Land?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Nein!</strong> Du kannst dich mit deinen deutschen Amazon-Zugangsdaten auf allen europäischen Amazon-Seiten einloggen. Deine Lieferadresse, Zahlungsmethoden und sogar deine Prime-Mitgliedschaft (mit gewissen Einschränkungen) sind verfügbar.</p>
+                    <p><strong>So funktioniert's:</strong></p>
+                    <ul>
+                        <li>Klicke auf einen Deal-Link auf dieser Seite</li>
+                        <li>Logge dich mit deinen gewohnten Amazon-Daten ein</li>
+                        <li>Deine deutsche Lieferadresse wird automatisch vorgeschlagen</li>
+                        <li>Bestelle wie gewohnt</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Was ist mit Versandkosten und Lieferzeiten?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Die Versandkosten und Lieferzeiten können sich von deutschen Bestellungen unterscheiden:</p>
+                    <ul>
+                        <li><strong>Versandkosten:</strong> Variieren je nach Verkäufer und Land. Amazon selbst bietet oft kostenlosen Versand ab einem bestimmten Bestellwert (meist 29-39 €).</li>
+                        <li><strong>Prime-Versand:</strong> Funktioniert nur eingeschränkt. Deutsche Prime-Mitglieder erhalten keinen automatischen kostenlosen Versand auf ausländischen Amazon-Seiten.</li>
+                        <li><strong>Lieferzeit:</strong> Meist 3-7 Werktage. Produkte werden oft aus Lagern in der Nähe der Grenze verschickt.</li>
+                    </ul>
+                    <div class="faq-highlight">
+                        <strong>⚠️ Wichtig:</strong> Die genauen Versandkosten und Lieferdaten werden dir vor der finalen Bestellung angezeigt. Prüfe diese sorgfältig!
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Wie funktioniert die Mehrwertsteuer bei internationalen Bestellungen?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Amazon regelt das automatisch für dich:</strong></p>
+                    <ul>
+                        <li>Die auf der ausländischen Website angezeigten Preise enthalten die Mehrwertsteuer des jeweiligen Landes</li>
+                        <li>Im Warenkorb wird die ausländische MwSt. abgezogen und die deutsche MwSt. (19% bzw. 7%) hinzugefügt</li>
+                        <li>Der finale Preis im Checkout zeigt den tatsächlichen Betrag mit deutscher Steuer</li>
+                        <li><strong>Keine zusätzlichen Zollgebühren</strong> innerhalb der EU!</li>
+                    </ul>
+                    <p>Du musst dich also um die Steuern nicht kümmern – Amazon übernimmt das vollständig.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Was ist mit Rückgaben und Garantie?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Bei Rückgaben und Garantie gelten andere Bedingungen als auf Amazon.de:</p>
+                    <ul>
+                        <li><strong>Rückgaberecht:</strong> Das EU-weite Widerrufsrecht von 14 Tagen gilt auch bei internationalen Bestellungen</li>
+                        <li><strong>Rücksendekosten:</strong> Müssen oft vom Käufer getragen werden – es sei denn, der Artikel ist defekt</li>
+                        <li><strong>Rücksendeadresse:</strong> Kann im Ausland liegen, was die Rücksendung teurer macht</li>
+                        <li><strong>Garantie:</strong> Die gesetzliche Gewährleistung von 2 Jahren gilt EU-weit, die Abwicklung erfolgt jedoch über die ausländische Amazon-Seite</li>
+                    </ul>
+                    <div class="faq-highlight">
+                        <strong>💡 Tipp:</strong> Bestelle bevorzugt Produkte, die direkt von Amazon (nicht Drittanbieter) verkauft werden – hier ist die Abwicklung meist unkomplizierter.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Warum sind manche Produkte auf ausländischen Amazon-Seiten günstiger?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Es gibt mehrere Gründe für Preisunterschiede zwischen den Ländern:</p>
+                    <ul>
+                        <li><strong>Lokale Angebote:</strong> Flash-Sales und Tagesangebote sind oft länderspezifisch</li>
+                        <li><strong>Unterschiedliche Marktpreise:</strong> Hersteller setzen verschiedene Preise je nach Land</li>
+                        <li><strong>Lagerbestände:</strong> Überschüssige Bestände werden regional stärker rabattiert</li>
+                        <li><strong>Wettbewerb:</strong> Die Konkurrenzsituation unterscheidet sich zwischen den Märkten</li>
+                        <li><strong>Buchpreisbindung:</strong> Gilt nur in Deutschland – Bücher sind im Ausland oft günstiger</li>
+                    </ul>
+                    <p>Genau deshalb lohnt sich der Blick über die Grenze – und genau das macht TopTenTech für dich!</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>In welcher Sprache ist die Bestellabwicklung?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Die ausländischen Amazon-Websites sind in der jeweiligen Landessprache:</p>
+                    <ul>
+                        <li>amazon.es → Spanisch</li>
+                        <li>amazon.fr → Französisch</li>
+                        <li>amazon.it → Italienisch</li>
+                    </ul>
+                    <p><strong>Aber keine Sorge:</strong> Der Bestellprozess ist identisch zu Amazon.de. Moderne Browser bieten automatische Übersetzung an. Die wichtigsten Begriffe wie "In den Warenkorb" oder "Jetzt kaufen" sind schnell erkennbar, da sie ähnlich platziert sind wie auf Amazon.de.</p>
+                    <div class="faq-highlight">
+                        <strong>💡 Browser-Tipp:</strong> Chrome und Edge bieten automatische Seitenübersetzung an. Einfach in den Browser-Einstellungen aktivieren!
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Was passiert bei Problemen mit der Bestellung?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Der Amazon-Kundenservice hilft auch bei internationalen Bestellungen:</p>
+                    <ul>
+                        <li><strong>Deutscher Kundenservice:</strong> Du kannst dich bei Problemen weiterhin an den deutschen Amazon-Support wenden</li>
+                        <li><strong>A-bis-Z-Garantie:</strong> Gilt auch für internationale Bestellungen innerhalb der EU</li>
+                        <li><strong>Käuferschutz:</strong> Amazon schützt dich auch bei Bestellungen auf ausländischen Marktplätzen</li>
+                    </ul>
+                    <p>In der Regel sind Probleme selten, da Amazon EU-weit nach denselben hohen Standards arbeitet.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Lohnt sich die Bestellung im Ausland überhaupt?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Ja, definitiv – aber mit Augenmaß!</strong></p>
+                    <p><strong>Es lohnt sich besonders bei:</strong></p>
+                    <ul>
+                        <li>Hohen Rabatten (ab 20% oder mehr)</li>
+                        <li>Teuren Produkten (ab 100 € Kaufpreis)</li>
+                        <li>Produkten, die direkt von Amazon verkauft werden</li>
+                        <li>Angeboten mit kostenlosem Versand</li>
+                    </ul>
+                    <p><strong>Weniger empfehlenswert bei:</strong></p>
+                    <ul>
+                        <li>Sehr günstigen Artikeln (unter 20 €) – wegen möglicher Versandkosten</li>
+                        <li>Produkten mit hoher Rücksendequote (z.B. Kleidung in unklarer Größe)</li>
+                        <li>Drittanbietern mit schlechten Bewertungen</li>
+                    </ul>
+                    <div class="faq-highlight">
+                        <strong>🎯 Faustregel:</strong> Je höher der Rabatt und je teurer das Produkt, desto mehr lohnt sich der Blick über die Grenze!
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <footer>
-            <p>Amazon Deals Tracker | Aktualisiert 18.10.2025 20:20</p>
+            <p>TopTenTech - Amazon Deals Tracker | Aktualisiert 18.10.2025 20:20</p>
             <p>
                 <a href="#" id="impressum-link">Impressum</a> |
                 <a href="#" id="datenschutz-link">Datenschutz</a>
             </p>
         </footer>
     </div>
+    
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="back-to-top">↑</div>
     
     <!-- Impressum Modal -->
     <div id="impressum-modal" class="modal">
@@ -628,14 +1182,13 @@
         // Extrahiere einzigartige Marken
         const brands = [...new Set(deals.map(d => d.brand))].sort();
         
-        // Baue Marken-Filter auf
-        const brandFiltersContainer = document.getElementById('brand-filters');
+        // Baue Marken-Filter Dropdown auf
+        const brandFilter = document.getElementById('brand-filter');
         brands.forEach(brand => {
-            const btn = document.createElement('button');
-            btn.className = 'filter-btn';
-            btn.dataset.brand = brand;
-            btn.textContent = brand;
-            brandFiltersContainer.appendChild(btn);
+            const option = document.createElement('option');
+            option.value = brand;
+            option.textContent = brand;
+            brandFilter.appendChild(option);
         });
         
         // Event Listeners
@@ -644,31 +1197,62 @@
             renderDeals();
         });
         
-        document.getElementById('brand-filters').addEventListener('click', (e) => {
-            if (e.target.classList.contains('filter-btn')) {
-                document.querySelectorAll('#brand-filters .filter-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                e.target.classList.add('active');
-                currentFilters.brand = e.target.dataset.brand;
-                renderDeals();
-            }
+        document.getElementById('brand-filter').addEventListener('change', (e) => {
+            currentFilters.brand = e.target.value;
+            renderDeals();
         });
         
-        document.getElementById('country-filters').addEventListener('click', (e) => {
-            if (e.target.classList.contains('filter-btn')) {
-                document.querySelectorAll('#country-filters .filter-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                e.target.classList.add('active');
-                currentFilters.country = e.target.dataset.country;
-                renderDeals();
-            }
+        document.getElementById('country-filter').addEventListener('change', (e) => {
+            currentFilters.country = e.target.value;
+            renderDeals();
         });
         
         document.getElementById('sort').addEventListener('change', (e) => {
             currentFilters.sort = e.target.value;
             renderDeals();
+        });
+        
+        document.getElementById('reset-filters').addEventListener('click', () => {
+            document.getElementById('search').value = '';
+            document.getElementById('brand-filter').value = 'all';
+            document.getElementById('country-filter').value = 'all';
+            document.getElementById('sort').value = 'discount-desc';
+            currentFilters = {
+                brand: 'all',
+                country: 'all',
+                search: '',
+                sort: 'discount-desc'
+            };
+            renderDeals();
+        });
+        
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('.faq-icon');
+                
+                answer.classList.toggle('active');
+                icon.classList.toggle('active');
+            });
+        });
+        
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
         
         // Modal functionality
@@ -714,19 +1298,45 @@
             return flags[country] || '🌍';
         }
         
+        function getCountryName(country) {
+            const names = {
+                'de': 'DE',
+                'es': 'ES',
+                'it': 'IT',
+                'fr': 'FR'
+            };
+            return names[country] || country.toUpperCase();
+        }
+        
+        function calculateSavings(currentPrice, originalPrice) {
+            if (!currentPrice || !originalPrice) return null;
+            
+            try {
+                const current = parseFloat(currentPrice.replace(/[^\d,]/g, '').replace(',', '.'));
+                const original = parseFloat(originalPrice.replace(/[^\d,]/g, '').replace(',', '.'));
+                
+                if (original > current) {
+                    const savings = original - current;
+                    const currency = currentPrice.includes('€') ? '€' : (currentPrice.includes('$') ? '$' : '£');
+                    return `${savings.toFixed(2).replace('.', ',')} ${currency}`;
+                }
+            } catch (e) {
+                return null;
+            }
+            
+            return null;
+        }
+        
         function filterDeals() {
             return deals.filter(deal => {
-                // Markenfilter
                 if (currentFilters.brand !== 'all' && deal.brand !== currentFilters.brand) {
                     return false;
                 }
                 
-                // Länderfilter
                 if (currentFilters.country !== 'all' && deal.country !== currentFilters.country) {
                     return false;
                 }
                 
-                // Suchfilter
                 if (currentFilters.search && !deal.title.toLowerCase().includes(currentFilters.search)) {
                     return false;
                 }
@@ -762,6 +1372,9 @@
             
             const grid = document.getElementById('deals-grid');
             const noResults = document.getElementById('no-results');
+            const visibleCount = document.getElementById('visible-count');
+            
+            visibleCount.textContent = sortedDeals.length;
             
             if (sortedDeals.length === 0) {
                 grid.style.display = 'none';
@@ -772,24 +1385,36 @@
             grid.style.display = 'grid';
             noResults.style.display = 'none';
             
-            grid.innerHTML = sortedDeals.map(deal => `
+            grid.innerHTML = sortedDeals.map(deal => {
+                const savings = calculateSavings(deal.current_price, deal.original_price);
+                
+                return `
                 <div class="deal-card">
-                    ${deal.picture ? `<img src="${deal.picture}" alt="${deal.title}" class="deal-image">` : ''}
+                    <div class="deal-image-container">
+                        ${deal.picture ? `<img src="${deal.picture}" alt="${deal.title}" class="deal-image">` : ''}
+                        ${deal.discount ? `
+                        <div class="deal-badges">
+                            <div class="discount-badge">${deal.discount}</div>
+                        </div>
+                        ` : ''}
+                    </div>
                     <div class="deal-content">
-                        <div>
+                        <div class="deal-meta">
                             <span class="deal-brand">${deal.brand}</span>
-                            <span class="deal-country">${getCountryFlag(deal.country)} ${deal.country.toUpperCase()}</span>
+                            <span class="deal-country">${getCountryFlag(deal.country)} ${getCountryName(deal.country)}</span>
                         </div>
                         <div class="deal-title">${deal.title}</div>
                         <div class="deal-prices">
-                            ${deal.current_price ? `<span class="current-price">${deal.current_price}</span>` : ''}
-                            ${deal.original_price ? `<span class="original-price">${deal.original_price}</span>` : ''}
-                            ${deal.discount ? `<span class="discount-badge">-${deal.discount}</span>` : ''}
+                            <div class="price-row">
+                                ${deal.current_price ? `<span class="current-price">${deal.current_price}</span>` : ''}
+                                ${deal.original_price ? `<span class="original-price">${deal.original_price}</span>` : ''}
+                            </div>
+                            ${savings ? `<div class="savings-info">💰 Du sparst ${savings}</div>` : ''}
                         </div>
                         ${deal.link ? `<a href="${deal.link}" target="_blank" rel="noopener noreferrer nofollow sponsored" class="deal-link">Zum Angebot →</a>` : ''}
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
         
         // Initial render

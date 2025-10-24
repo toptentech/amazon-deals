@@ -1,17 +1,44 @@
 <!DOCTYPE html>
-<html lang="de">
-<head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8BP7LESFC"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    <html lang="de">
+    <head>
+        <!-- Google Consent Mode (MUSS VOR allem anderen kommen) -->
+        <script data-cookieconsent="ignore">
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            
+            gtag('consent', 'default', {
+                'ad_personalization': 'denied',
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'analytics_storage': 'denied',
+                'functionality_storage': 'denied',
+                'personalization_storage': 'denied',
+                'security_storage': 'granted',
+                'wait_for_update': 500
+            });
+            
+            gtag('set', 'ads_data_redaction', true);
+            gtag('set', 'url_passthrough', false);
+        </script>
+        <!-- Ende Google Consent Mode -->
+        
+        <!-- Google tag (gtag.js) - MIT data-cookieconsent="ignore" -->
+        <script data-cookieconsent="ignore" async src="https://www.googletagmanager.com/gtag/js?id=G-Q8BP7LESFC"></script>
+        <script data-cookieconsent="ignore">
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-Q8BP7LESFC');
+        </script>
+        <!-- Ende Google Tag -->
+        
+        <!-- CookieBot (MUSS NACH Google Consent Mode und gtag kommen) -->
+        <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" 
+                data-cbid="bf3b8e17-86ef-4684-99ca-8dc758394073" 
+                data-blockingmode="auto" 
+                type="text/javascript"></script>
+        <!-- Ende CookieBot -->
 
-      gtag('config', 'G-Q8BP7LESFC');
-    </script>
-
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TopTenTech - Die besten Amazon Deals aus 4 Ländern</title>
